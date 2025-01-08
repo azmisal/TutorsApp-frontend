@@ -1,0 +1,146 @@
+.studentDash{
+    height: 100vh;
+    width: 100vw;
+    background-color: rgb(231, 234, 249);
+    display: flex;
+
+
+}
+.stuDashNav{
+    background-color: rgb(11, 11, 11);
+    width: 20%;
+    height: 100vh;
+}
+.stuProfile{
+    background-color: rgb(60, 60, 60);
+    height: 15%;
+    display: flex;
+    padding: 0% 5%;
+    /* justify-content: center; */
+    align-items: center;
+}
+.dp{
+    height: 60px;
+    border-radius: 30px;
+}
+.studet{
+    text-align: left;
+    padding-left: 5%;
+    width: 80%;
+    height: 100%;
+    /* background-color: red; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.stuName{
+    font-size: 18px;
+    margin: 0;
+}
+.stuEmail{
+    font-size: 14px;
+    margin: 0;
+
+}
+.stuDashContent{
+    width: 80%;
+    padding-left: 2%;
+    padding-top: 2%;
+    padding-right:2% ;
+    color: black;
+    display: flex;
+    overflow-y: scroll;
+    scrollbar-width: none;
+    scroll-behavior: smooth;
+    /* background-color: red; */
+}
+
+.bidPart{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+.bidHeadAdd{
+    margin-bottom: 30px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.bidsContainer{
+    width: 100%;
+}
+.bidCard{
+    width: 100%;
+    /* border: 1px solid black; */
+    border-radius: 10px;
+    margin-bottom: 2%;
+    display: flex;
+    flex-direction: column;
+    padding:2% 4% 4% 4%;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    cursor: pointer;
+    transition: .15s ease-in-out;
+    
+}
+.bidCard:hover{
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    transition: .15s ease-in-out;
+    transform: scale(1.015);
+
+}
+.topOfBid{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+}
+.topLeftOfBid{
+   
+    width: 75%;
+    display: flex;
+}
+.topLeftOfBid p{
+    margin: 0;
+    margin-right: 5%;
+    width: auto;
+    color: rgb(3, 3, 119);
+}
+.stuBidsHead{
+
+    font-size: 20px;
+    margin-top: 0;
+}
+.bidHeadAdd Button{
+    background-color: rgb(4, 4, 212);
+    color: white;
+}
+.bidHeadAdd Button:hover{
+    background-color: rgb(0, 0, 254);
+    transform: scale(1.1);
+}
+.bidSub{
+    color: rgb(207, 3, 3);
+    font-weight: 700;
+}
+.topRightOfBid{
+    display: flex;
+    justify-content: right;
+}
+
+.cost{
+    color: rgb(1, 157, 1);
+    font-weight: 700;
+}
+.bidRemarks{
+    text-align: left;
+    width: 90%;
+    margin: 0;
+    color: rgb(3, 3, 119);
+}
+.remark{
+    color: black;
+    font-weight: 400;
+}
