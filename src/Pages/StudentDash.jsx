@@ -6,6 +6,7 @@ import { Button } from '@chakra-ui/react'
 const StudentDash = () => {
   const studentName = 'John Doe';
   const studentEmail = 'johndoe2001@gmail.com';
+  
 
   // Mock data array
   const bids = [
@@ -13,18 +14,21 @@ const StudentDash = () => {
       language: 'English',
       subject: 'Math',
       cost: '$50/hour',
+      standard:'7',
       syllabus: 'CBSE',
       remarks: 'Experienced tutor with 5 years of teaching. kjagdsku sdsagdk sagdkusagd sdgjg dkasgdkas hgakdasjdg kasdg kasdjasgdjas jd kjas gdkasdjgkasjddfkasuyasdkja guygfk gaef kdjfhbflhgjfngghg kjfj h hdsu kj j',
     },
     {
       language: 'French',
       subject: 'History',
+      standard:'7',
       cost: '$40/hour',
       syllabus: 'Kerala Syllabus',
       remarks: 'Specialized in modern history.sddiu h ouahdfku gss iyga yagwi hyfh iuhas ivuhasdkjh gahcjg kfja fadfadfg adjfgad kf ag fya fk agigfjyagfjafgajdg asdg asj dasdgjsgdshdjasf dsajd asjhdg sajdsj',
     },
     {
       language: 'Spanish',
+      standard:'7',
       subject: 'Science',
       cost: '$45/hour',
       syllabus: 'ICSE',
@@ -47,7 +51,7 @@ const StudentDash = () => {
         <div className="bidPart">
           <div className="bidHeadAdd">
         <h1 className="stuBidsHead">Your Bids</h1>
-        <Button className='addButt'>Add</Button>
+        <a href="/addBid"><Button className='addButt'>Add</Button></a>
         </div>
         <div className="bidsContainer">
           {bids.map((bid,index)=>(
@@ -57,6 +61,8 @@ const StudentDash = () => {
               <p className="bidSubject">Subject: <span className='bidSub'>{bid.subject}</span></p>
               <p className="bidSyllabus">Syllabus: <span className='bidSub'>{bid.syllabus}</span></p>
               <p className="bidLanguage">Language: <span className='bidSub'>{bid.language}</span></p>
+              <p className="bidLanguage">Class: <span className='bidSub'>{bid.standard}</span></p>
+
               </div>
               <div className="topRightOfBid">
               <p className="bidCost">Cost: <span className='cost'>{bid.cost}</span></p>

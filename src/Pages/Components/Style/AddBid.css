@@ -1,0 +1,52 @@
+.addBid{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.bidBox{
+    width: 40%;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    padding: 20px 20px;
+    text-align: left;
+    background-color: #E6F0E7;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+.bidHead{
+    font-size: 25px;
+    font-weight: 600;
+    margin-bottom: 15px;
+    width: 100%;
+    text-align: center;
+}
+
+.bidBox label{
+    font-size: 14px;
+    width: 100%;
+    text-align: left;
+    margin-bottom: 5px;
+}
+.bidBox Input,.bidBox select,.bidBox Input:active,.bidBox Select:active,.bidBox Textarea:active,.bidBox Textarea{
+    width: 100%;
+    /* height: 20px; */
+    margin-bottom: 15px;
+    background-color: white;
+    border-radius: 7px;
+    outline: none;
+    border: none;
+}
+.bidBox select{
+    padding: 4px 10px;
+    font-size: 14px;
+    color: rgba(70, 70, 76, 0.7);
+    font-size: 600;
+}
+.downArrowIcon{
+    height: 100%;
+    
+}
