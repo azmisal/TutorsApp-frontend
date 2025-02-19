@@ -1,14 +1,18 @@
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import { Select, Input, InputGroup, InputRightAddon, Textarea, Button } from '@chakra-ui/react'
 import { MdKeyboardArrowDown } from "react-icons/md";
+import { useUser } from "../Contexts/UserContext";
+import axios from 'axios';
 
 import "./Style/AddBid.css"
 const AddBid = () => {
-
+  const { userId } = useUser();
+   
     const [bid, setBid] = useState({
+        userId:userId,
         username: "",
         language: "",
-        cost: "",
+        cost: 0,
         subject: "",
         syllabus: "",
         standard: "",
@@ -22,16 +26,28 @@ const AddBid = () => {
         }));
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit =async (e) => {
         e.preventDefault();
-        alert("Bid Submitted");
+        try{
+            const userResponse = await axios.post("http://localhost:5000/api/auth/getusername",userId);
+            const username = userResponse.data.username;
+            
+
+            const response = await axios.post("http://localhost:5000/api/bids/addbid",bid);
+            console.log(response.data);
+            alert("Bid Submitted");
+
+        }
+        catch(error){
+            console.log(error);
+        }
         console.log(bid);
     }
 
     return (
         <div className='addBid'>
             <form className="bidBox"onSubmit={handleSubmit}>
-                <h1 className="bidHead">Add Bid</h1>
+                <h1 className="bidHead">Add Bid : {userId}</h1>
                 
                 <label htmlFor="language">Language</label>
                 <select placeholder='Select Language' icon={<MdKeyboardArrowDown className='downArrowIcon' size={'sm'}/>} size={'sm'} name='language' value={bid.language} onChange={handleChange} required>

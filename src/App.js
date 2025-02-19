@@ -7,6 +7,7 @@ import AddBid from './Components/AddBid';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { UserProvider } from "./Contexts/UserContext";
 import ChatPage from "../src/Components/ChatSystem/ChatSystem"
+import BidPage from "./Pages/BidPage/BidPage"
 
 function App() {
   return (
@@ -18,10 +19,12 @@ function App() {
 
             <Routes>
               <Route path="/chat" element={<ChatPage />} />
-              <Route path="/" element={<Login />} /> {/* Default route */}
+              <Route path="/login" element={<Login />} /> {/* Default route */}
               <Route path="/signup" element={<Signup />} />
               <Route path="/studentdashboard" element={<StudentDash />} />
               <Route path="/addbid" element={<AddBid />} />
+              <Route path="/bidpage" element={<BidPage />} />
+
             </Routes>
 
           </div>

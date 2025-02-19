@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, } from 'react';
+import { useNavigate } from 'react-router-dom';
 // import './LoginSignupPage.css';
 import { Box, VStack, Input, Button, RadioGroup, Radio, Text, HStack } from "@chakra-ui/react";
 import "./SignupPage.css"
@@ -16,6 +17,7 @@ export default function Signup() {
   });
   const [cnfrmPass, setCnfrmPass] = useState("");
   const [usernameExists, setUsernameExists] = useState(false);
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -38,10 +40,26 @@ export default function Signup() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData);
-    console.log(cnfrmPass);
+    if (validateEmail(formData.email)) {
+      console.log(formData);
+      try{
+      const response = await axios.post("http://localhost:5000/api/auth/signup");
+      if (response.data.success) {
+        alert("Signup Successfull");
+        navigate('/login');
+        
+      }}
+      catch(error){
+        alert("Invalid Credentials"+error);
+      }
 
-};
+
+    } else {
+      alert("please provide valid credentials");
+    }
+    
+  };
+
   // Validate Email function
 function validateEmail(email) {
   const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -73,7 +91,7 @@ function validateMobileNumber(mobile) {
             name="firstName"
             placeholder="First Name"
             onChange={handleChange}
-            isRequired
+            
           />
 
           {/* Last Name */}
@@ -82,7 +100,7 @@ function validateMobileNumber(mobile) {
             name="lastName"
             placeholder="Last Name"
             onChange={handleChange}
-            isRequired
+            
           />
 
           {/* Username */}
@@ -110,7 +128,7 @@ function validateMobileNumber(mobile) {
             name="mobile"
             placeholder="Mobile Number"
             onChange={handleChange}
-            isRequired
+            
           />
 
           {/* Password */}
@@ -128,7 +146,7 @@ function validateMobileNumber(mobile) {
             name="confirmPassword"
             placeholder="Confirm Password"
             onChange={(e)=>setCnfrmPass(e.target.value)}
-            isRequired
+            
           />
 
           {/* Submit Button */}

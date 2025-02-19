@@ -4,9 +4,11 @@ import Profile from '../../Assets/profile.webp';
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { Box, Button, Text, VStack, HStack, Image } from "@chakra-ui/react";
 
+import { useUser } from "../../Contexts/UserContext";
 
 
 const StudentDash = () => {
+  const { userId } = useUser();
   const studentName = 'John Doe';
   const studentEmail = 'johndoe2001@gmail.com';
   
@@ -46,7 +48,7 @@ const StudentDash = () => {
         <Box className="stuProfile" bg="rgb(60, 60, 60)" height="15%" display="flex" p="0 5%" alignItems="center">
           <Image src={Profile} className="dp" borderRadius="full" boxSize="60px" alt="Profile" />
           <Box className="student" textAlign="left" pl="5%" width="80%" height="100%" display="flex" flexDirection="column" justifyContent="center">
-            <Text className="stuName" fontSize="18px" margin="0">{studentName}</Text>
+            <Text className="stuName" fontSize="18px" margin="0">{userId}</Text>
             <Text className="stuEmail" fontSize="14px" margin="0">{studentEmail}</Text>
           </Box>
         </Box>

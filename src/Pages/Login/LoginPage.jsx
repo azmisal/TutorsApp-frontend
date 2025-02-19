@@ -6,13 +6,13 @@ import { useUser } from "../../Contexts/UserContext";
 import axios from 'axios';
 
 export default function Login() {
-  const { setUserId } = useUser();
+  const { userId,setUserId } = useUser();
   const navigate = useNavigate();
 
 
   const [formData, setFormData] = useState({
-    email: '',
-    password: '',
+    email: 'sasi@kund.com',
+    password: '123',
   });
 
   const handleChange = (e) => {
@@ -22,27 +22,29 @@ export default function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (validateEmail(formData.identifier)) {
-      // console.log(formData);
-      // try{
-      // const response = await axios.post("http://localhost:5000/login");
-      // if (response.data.success) {
-      //   setUserId(response.data.userId);
-      //   alert("Login");
-      //   navigate("/studentdashboard");
-      // }}
-      // catch(error){
-      //   alert("Invalid Credentials");
-      // }
+      console.log(formData);
+      try{
+      const response = await axios.post("http://localhost:5000/api/auth/login",formData);
+      if (response) {
+        const id = response.data.userId
+        setUserId(id);
+        alert("Login");
+        if(response.data.role === 'student'){
+          navigate("/studentdashboard");
+        }
+        else if(response.data.role === 'teacher'){
+          navigate("/bidpage");
+        }
+      }
+    else{
+      console.log(response);
+    }}
+      catch(error){
+        alert("Invalid Credentials"+error);
+      }
 
-      setUserId(formData.email);
-
-    } else {
-      alert("please provide valid credentials");
-    }
-    alert("Login");
     
-      navigate("/chat");
+    
   };
 
   function validateEmail(email) {
