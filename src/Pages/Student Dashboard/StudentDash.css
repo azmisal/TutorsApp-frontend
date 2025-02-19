@@ -50,7 +50,6 @@
     color: black;
     display: flex;
     overflow-y: scroll;
-    scrollbar-width: none;
     scroll-behavior: smooth;
     /* background-color: red; */
 }

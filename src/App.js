@@ -21,9 +21,9 @@ function App() {
               <Route path="/chat" element={<ChatPage />} />
               <Route path="/login" element={<Login />} /> {/* Default route */}
               <Route path="/signup" element={<Signup />} />
-              <Route path="/studentdashboard" element={<StudentDash />} />
-              <Route path="/addbid" element={<AddBid />} />
-              <Route path="/bidpage" element={<BidPage />} />
+              <Route path="/student/studentdashboard" element={<StudentDash />} />
+              <Route path="/student/addbid" element={<AddBid />} />
+              <Route path="/teacher/bidpage" element={<BidPage />} />
 
             </Routes>
 

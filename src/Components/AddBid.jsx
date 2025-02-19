@@ -17,7 +17,7 @@ const AddBid = () => {
         syllabus: "",
         standard: "",
         remarks: ""
-    })
+    });
     const handleChange = (e) => {
         const { name, value } = e.target;
         setBid((prevBid) => ({
@@ -30,9 +30,13 @@ const AddBid = () => {
         e.preventDefault();
         try{
             const userResponse = await axios.post("http://localhost:5000/api/auth/getusername",userId);
+            console.log(userResponse);
             const username = userResponse.data.username;
-            
-
+            setBid((prevBid) => ({
+                ...prevBid, 
+                username: username
+            }));
+            console.log("user: "+bid.username);
             const response = await axios.post("http://localhost:5000/api/bids/addbid",bid);
             console.log(response.data);
             alert("Bid Submitted");
@@ -41,7 +45,6 @@ const AddBid = () => {
         catch(error){
             console.log(error);
         }
-        console.log(bid);
     }
 
     return (

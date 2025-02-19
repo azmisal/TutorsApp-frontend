@@ -30,10 +30,10 @@ export default function Login() {
         setUserId(id);
         alert("Login");
         if(response.data.role === 'student'){
-          navigate("/studentdashboard");
+          navigate("/student/studentdashboard");
         }
         else if(response.data.role === 'teacher'){
-          navigate("/bidpage");
+          navigate("/teacher/bidpage");
         }
       }
     else{

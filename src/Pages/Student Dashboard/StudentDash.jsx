@@ -1,9 +1,9 @@
-import React from 'react';
+import React,{useState,useEffect} from 'react';
 import './StudentDash.css';
 import Profile from '../../Assets/profile.webp';
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { Box, Button, Text, VStack, HStack, Image } from "@chakra-ui/react";
-
+import axios from 'axios';
 import { useUser } from "../../Contexts/UserContext";
 
 
@@ -11,35 +11,22 @@ const StudentDash = () => {
   const { userId } = useUser();
   const studentName = 'John Doe';
   const studentEmail = 'johndoe2001@gmail.com';
-  
+  const [bids ,setBids] = useState([]); 
 
-  // Mock data array
-  const bids = [
-    {
-      language: 'English',
-      subject: 'Math',
-      cost: '$50/hour',
-      standard:'7',
-      syllabus: 'CBSE',
-      remarks: 'Experienced tutor with 5 years of teaching. kjagdsku sdsagdk sagdkusagd sdgjg dkasgdkas hgakdasjdg kasdg kasdjasgdjas jd kjas gdkasdjgkasjddfkasuyasdkja guygfk gaef kdjfhbflhgjfngghg kjfj h hdsu kj j',
-    },
-    {
-      language: 'French',
-      subject: 'History',
-      standard:'7',
-      cost: '$40/hour',
-      syllabus: 'Kerala Syllabus',
-      remarks: 'Specialized in modern history.sddiu h ouahdfku gss iyga yagwi hyfh iuhas ivuhasdkjh gahcjg kfja fadfadfg adjfgad kf ag fya fk agigfjyagfjafgajdg asdg asj dasdgjsgdshdjasf dsajd asjhdg sajdsj',
-    },
-    {
-      language: 'Spanish',
-      standard:'7',
-      subject: 'Science',
-      cost: '$45/hour',
-      syllabus: 'ICSE',
-      remarks: 'Interactive sessions with experiments.d;jbad;adfad ado oadfaief a h;ouo fhaoh o[wdDJF dsf OHA FO J;IFH SDOH S9d osdsf dahfo  doafh idsuj fodos fhdsu hfdsiufh dsiufh dsiufh ds9uh dsiuifdsh vh9u n',
-    },
-  ];
+ useEffect(()=>{
+  const fetchBids = async () => {
+  try{
+    const response = await axios.post("http://localhost:5000/api/bids/getbidbyid",userId)
+    setBids(response.data);
+    console.log(response.data)
+  }catch(error){
+    console.log(error);
+  }
+
+ };
+ fetchBids();
+},[])
+    
 
   return (
     <Box className="studentDash" height="100vh" width="100vw" bg="rgb(231, 234, 249)" display="flex">
@@ -65,7 +52,7 @@ const StudentDash = () => {
           {/* Bid Header */}
           <HStack className="bidHeadAdd" mb="30px" width="100%" justifyContent="space-between">
             <Text className="stuBidsHead" fontSize="20px" marginTop="0">Your Bids</Text>
-            <Button className="addButt" as="a" href="/addBid" bg="rgb(4, 4, 212)" color="white" _hover={{ bg: "rgb(0, 0, 254)", transform: "scale(1.1)" }}>
+            <Button className="addButt" as="a" href="/student/addbid" bg="rgb(4, 4, 212)" color="white" _hover={{ bg: "rgb(0, 0, 254)", transform: "scale(1.1)" }}>
               Add
             </Button>
           </HStack>
