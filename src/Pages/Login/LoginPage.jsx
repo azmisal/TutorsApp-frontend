@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import './LoginSignupPage.css';
 import { useNavigate } from 'react-router-dom';
-import { Box, Input, Button, VStack } from "@chakra-ui/react"
+import { Box, Input, Button, VStack, Heading } from "@chakra-ui/react"
 import { useUser } from "../../Contexts/UserContext";
 import axios from 'axios';
 
 export default function Login() {
-  const { userId,setUserId } = useUser();
+  const { user, setUser } = useUser();
   const navigate = useNavigate();
 
 
@@ -26,8 +26,11 @@ export default function Login() {
       try{
       const response = await axios.post("http://localhost:5000/api/auth/login",formData);
       if (response) {
-        const id = response.data.userId
-        setUserId(id);
+
+        console.log(response.data);
+        const { username, email, role, userId } = response.data; // Assuming _id is userId
+        setUser({ userId: userId, username, email, role });
+        
         alert("Login");
         if(response.data.role === 'student'){
           navigate("/student/studentdashboard");
@@ -57,7 +60,7 @@ export default function Login() {
     <div className="login-form">
 
       <Box bg="bg" width={'30%'} shadow={"rgba(0, 0, 0, 0.35) 0px 5px 15px"} borderRadius="md" p={'2rem'}>
-        <h1>Sign In</h1>
+      <Heading size="lg">SIGN IN</Heading>
         <form onSubmit={handleSubmit}>
           <VStack>
             <Input placeholder="Enter your email" gap={'10px'} name="email" value={formData.email} onChange={handleChange} />

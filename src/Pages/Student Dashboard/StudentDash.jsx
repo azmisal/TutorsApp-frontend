@@ -8,24 +8,31 @@ import { useUser } from "../../Contexts/UserContext";
 
 
 const StudentDash = () => {
-  const { userId } = useUser();
-  const studentName = 'John Doe';
-  const studentEmail = 'johndoe2001@gmail.com';
+  const { user } = useUser();
+ 
   const [bids ,setBids] = useState([]); 
 
- useEffect(()=>{
-  const fetchBids = async () => {
-  try{
-    const response = await axios.post("http://localhost:5000/api/bids/getbidbyid",userId)
-    setBids(response.data);
-    console.log(response.data)
-  }catch(error){
-    console.log(error);
-  }
-
- };
- fetchBids();
-},[])
+  useEffect(() => {  
+    const fetchBids = async () => {
+      if (!user.userId) {
+        console.log("User ID is missing, API call skipped.");
+        return;
+      }
+  
+      try {
+        console.log("Fetching bids for user:", user.userId);
+        const response = await axios.post("http://localhost:5000/api/bids/getbidbyid", { userId: user.userId });
+  
+        setBids(response.data.bids);
+        console.log(response.data);
+      } catch (error) {
+        console.log("Error fetching bids:", error);
+      }
+    };
+  
+    fetchBids();
+  }, [user.userId]); // Ensure effect runs only when userId is available
+  
     
 
   return (
@@ -35,8 +42,8 @@ const StudentDash = () => {
         <Box className="stuProfile" bg="rgb(60, 60, 60)" height="15%" display="flex" p="0 5%" alignItems="center">
           <Image src={Profile} className="dp" borderRadius="full" boxSize="60px" alt="Profile" />
           <Box className="student" textAlign="left" pl="5%" width="80%" height="100%" display="flex" flexDirection="column" justifyContent="center">
-            <Text className="stuName" fontSize="18px" margin="0">{userId}</Text>
-            <Text className="stuEmail" fontSize="14px" margin="0">{studentEmail}</Text>
+            <Text className="stuName" fontSize="16px" margin="0">{user.username}</Text>
+            <Text className="stuEmail" fontSize="14px" margin="0">{user.email}</Text>
           </Box>
         </Box>
         <Box>

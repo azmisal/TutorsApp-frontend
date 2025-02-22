@@ -5,20 +5,21 @@ const UserContext = createContext();
 
 // Provider Component
 export const UserProvider = ({ children }) => {
-    const [userId, setUserId] = useState(() => {
-        return localStorage.getItem("userId") || null;
+    const [user, setUser] = useState(() => {
+        const storedUser = localStorage.getItem("user");
+        return storedUser ? JSON.parse(storedUser) : null;
     });
 
     useEffect(() => {
-        if (userId) {
-            localStorage.setItem("userId", userId);
+        if (user) {
+            localStorage.setItem("user", JSON.stringify(user));
         } else {
-            localStorage.removeItem("userId");
+            localStorage.removeItem("user");
         }
-    }, [userId]);
+    }, [user]);
 
     return (
-        <UserContext.Provider value={{ userId, setUserId }}>
+        <UserContext.Provider value={{ user, setUser }}>
             {children}
         </UserContext.Provider>
     );

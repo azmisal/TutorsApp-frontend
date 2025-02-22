@@ -6,11 +6,13 @@ import axios from 'axios';
 
 import "./Style/AddBid.css"
 const AddBid = () => {
-  const { userId } = useUser();
+  const { userId,username } = useUser();
    
+
+
     const [bid, setBid] = useState({
         userId:userId,
-        username: "",
+        username: username,
         language: "",
         cost: 0,
         subject: "",
@@ -29,14 +31,7 @@ const AddBid = () => {
     const handleSubmit =async (e) => {
         e.preventDefault();
         try{
-            const userResponse = await axios.post("http://localhost:5000/api/auth/getusername",userId);
-            console.log(userResponse);
-            const username = userResponse.data.username;
-            setBid((prevBid) => ({
-                ...prevBid, 
-                username: username
-            }));
-            console.log("user: "+bid.username);
+          
             const response = await axios.post("http://localhost:5000/api/bids/addbid",bid);
             console.log(response.data);
             alert("Bid Submitted");
@@ -50,7 +45,7 @@ const AddBid = () => {
     return (
         <div className='addBid'>
             <form className="bidBox"onSubmit={handleSubmit}>
-                <h1 className="bidHead">Add Bid : {userId}</h1>
+                <h1 className="bidHead">Add Bid : {userId} cum : {bid.username}</h1>
                 
                 <label htmlFor="language">Language</label>
                 <select placeholder='Select Language' icon={<MdKeyboardArrowDown className='downArrowIcon' size={'sm'}/>} size={'sm'} name='language' value={bid.language} onChange={handleChange} required>
