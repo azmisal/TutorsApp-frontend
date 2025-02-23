@@ -1,0 +1,25 @@
+.stuDashNav {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.dashLogoutButton { 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: .1s ease-in-out;
+
+}
+
+.dashLogoutButton:hover { 
+    background-color: #f0f0f030;
+    font-size: 18px;
+    transition: .1s ease-in-out;
+}
+.logoutLogodiv{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}

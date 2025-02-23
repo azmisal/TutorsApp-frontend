@@ -28,12 +28,12 @@ export default function Login() {
       if (response) {
 
         console.log(response.data);
-        const { username, email, role, userId } = response.data; // Assuming _id is userId
+        const { username, email, role, userId } = response.data; 
         setUser({ userId: userId, username, email, role });
         
         alert("Login");
         if(response.data.role === 'student'){
-          navigate("/student/studentdashboard");
+          navigate("/student/dashboard");
         }
         else if(response.data.role === 'teacher'){
           navigate("/teacher/bidpage");

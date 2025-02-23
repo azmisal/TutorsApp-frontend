@@ -1,41 +1,57 @@
-import React,{useState,useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import './StudentDash.css';
 import Profile from '../../Assets/profile.webp';
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { Box, Button, Text, VStack, HStack, Image } from "@chakra-ui/react";
 import axios from 'axios';
 import { useUser } from "../../Contexts/UserContext";
+import { FiLogOut } from "react-icons/fi";
+import { MdKeyboardArrowRight } from "react-icons/md";
+import Loading from '../LoadingPage.jsx/Loading';
+import { useNavigate } from 'react-router-dom';
+
 
 
 const StudentDash = () => {
-  const { user } = useUser();
- 
-  const [bids ,setBids] = useState([]); 
 
-  useEffect(() => {  
+  const [isLoading, setLoading] = useState(false);
+  const { user } = useUser();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem("user");
+    sessionStorage.clear();
+    setTimeout(() => {
+      navigate("/login"); 
+    }, 100);
+  };
+  
+  const [bids, setBids] = useState([]);
+
+  useEffect(() => {
     const fetchBids = async () => {
       if (!user.userId) {
         console.log("User ID is missing, API call skipped.");
         return;
       }
-  
+
       try {
         console.log("Fetching bids for user:", user.userId);
         const response = await axios.post("http://localhost:5000/api/bids/getbidbyid", { userId: user.userId });
-  
+
         setBids(response.data.bids);
         console.log(response.data);
       } catch (error) {
         console.log("Error fetching bids:", error);
       }
     };
-  
+
     fetchBids();
   }, [user.userId]); // Ensure effect runs only when userId is available
-  
-    
 
-  return (
+
+
+  return isLoading ? <Loading /> :  (
     <Box className="studentDash" height="100vh" width="100vw" bg="rgb(231, 234, 249)" display="flex">
       {/* Student Navigation */}
       <Box className="stuDashNav" bg="rgb(11, 11, 11)" width="20%" height="100vh">
@@ -48,8 +64,14 @@ const StudentDash = () => {
         </Box>
         <Box>
           <VStack>
-            
+
           </VStack>
+        </Box>
+        <Box w='100%' h='7%' bg='#8080808f' className='dashLogoutButton' onClick={handleLogout}>
+          <FiLogOut style={{ marginRight: "10px", color: 'white' }} />
+          <Text color={'white'} style={{ marginRight: "10px" }} >Logout</Text>
+
+          <MdKeyboardArrowRight style={{ fontSize: '20px', color: 'white' }} />
         </Box>
       </Box>
 

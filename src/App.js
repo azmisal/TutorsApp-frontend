@@ -8,6 +8,8 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { UserProvider } from "./Contexts/UserContext";
 import ChatPage from "../src/Components/ChatSystem/ChatSystem"
 import BidPage from "./Pages/BidPage/BidPage"
+import TeacherDash from './Pages/Teacher Dashboard/TeacherDash';
+
 
 function App() {
   return (
@@ -21,7 +23,9 @@ function App() {
               <Route path="/chat" element={<ChatPage />} />
               <Route path="/login" element={<Login />} /> {/* Default route */}
               <Route path="/signup" element={<Signup />} />
-              <Route path="/student/studentdashboard" element={<StudentDash />} />
+              <Route path="/student/dashboard" element={<StudentDash />} />
+              <Route path="/teacher/dashboard" element={<TeacherDash />} />
+
               <Route path="/student/addbid" element={<AddBid />} />
               <Route path="/teacher/bidpage" element={<BidPage />} />
 
